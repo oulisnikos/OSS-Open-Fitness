@@ -1,0 +1,7 @@
+{
+  "name": "OSS-Open-fitness",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
