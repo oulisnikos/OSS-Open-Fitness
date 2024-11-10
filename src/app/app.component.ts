@@ -4,6 +4,7 @@ import { StatusBar } from '@capacitor/status-bar';
 import { Platform } from '@ionic/angular';
 import { AuthService } from 'ionic-appauth';
 import { Storage} from '@ionic/storage-angular';
+import { PushNotificationsService } from './service/push-notifications.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private authService: AuthService,
-    private storage: Storage
+    private storage: Storage,
+    private pushNotificationsService: PushNotificationsService
   ) {
     this.initializeApp();
   }
@@ -31,6 +33,8 @@ export class AppComponent {
         // Initialize AuthService
         await this.authService.init();
         console.log("Authorization Service initialize successfully!");
+
+        this.pushNotificationsService.bootstrapPushNotifications();
 
         StatusBar.setBackgroundColor({color: "#b42770"});
         StatusBar.show();

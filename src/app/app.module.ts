@@ -11,6 +11,7 @@ import { CoreModule } from './service/auth/core/core.module';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppErrorHandler } from './service/app-error-handler';
 import { RequestInterceptorService } from './service/request-interceptor.service';
+import { PushNotificationsService } from './service/push-notifications.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { RequestInterceptorService } from './service/request-interceptor.service
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true },
+    PushNotificationsService
   ],
   bootstrap: [AppComponent],
 })

@@ -14,6 +14,7 @@ import { Device } from "@capacitor/device";
 import { AppStateProvider } from "src/app/service/app-state";
 import { GymProgramsProvider } from "src/app/service/gym-programs.provider";
 import { WebViewCache } from "capacitor-plugin-webview-cache";
+import { PushNotificationsService } from "src/app/service/push-notifications.service";
 
 @Component({
   selector: "app-profile",
@@ -36,7 +37,7 @@ export class ProfilePage implements OnInit {
     private router: Router,
     private modalController: ModalController,
     private routerOutlet: IonRouterOutlet,
-    //private notification: PushNotificationsService
+    private notification: PushNotificationsService
   ) {
 
       App.getInfo().then((info) => {
@@ -83,9 +84,8 @@ export class ProfilePage implements OnInit {
           text: "Log Out",
           handler: async () => {
             this.appState.initState();
-            //this.notification.unregisterPushNotifications(true);
+            this.notification.unregisterPushNotifications(true);
             await this.authService.signOut();
-            //this.notification.unregisterPushNotifications();
             this.router.navigateByUrl("/landing");
           },
         },

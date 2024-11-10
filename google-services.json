@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "954106559761",
+    "project_id": "open-fitness-85a69",
+    "storage_bucket": "open-fitness-85a69.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954106559761:android:9a997831710f70a80360b0",
+        "android_client_info": {
+          "package_name": "gr.oss.open.fitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954106559761-90vqli9kemdd29ip4t2jst6lbviec884.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOpGkAz9vP1aY28vLF4qir16-b5VPnUIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954106559761-90vqli9kemdd29ip4t2jst6lbviec884.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
