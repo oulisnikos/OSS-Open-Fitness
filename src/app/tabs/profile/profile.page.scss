@@ -1,0 +1,30 @@
+.header-image {
+  // background-image: url(https://ununsplash.imgix.net/photo-1421091242698-34f6ad7fc088?fit=crop&fm=jpg&h=650&q=75&w=950);
+  background-image: url(/assets/imgs/program-3.jpg); // height: 40vh;
+  height: 50vh;
+  //filter: blur(10px);
+  background-position: center top;
+  opacity: 0.5;
+}
+.main-content {
+  width: 100%;
+  padding: 20px;
+  margin-top: -100px;
+  // background-color: white;
+}
+.user-avatar {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  z-index: 10;
+  margin-top: -100px;
+  position: relative;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 3px 20px 3px rgba(0, 0, 0, 0.75);
+}
+span {
+  font-size: 1.5rem;
+  font-weight: normal;
+}

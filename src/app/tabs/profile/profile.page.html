@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title> Profile </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <img style="height: 60px" [src]="getGymImageSrc()" />
+  <h4><span>Usename: </span>{{userData?.preferred_username}}</h4>
+  <h4><span>Email: </span>{{userData?.email}}</h4>
+  <h4><span>Name: </span>{{userData?.name}}</h4>
+  <h4><span>First Name: </span>{{userData?.given_name}}</h4>
+  <h4><span>Last Name: </span>{{userData?.family_name}}</h4>
+  <h4><span>Open Fitness Mobile: </span>{{versionCode}} ({{versionNumber}})</h4>
+  <ion-list>
+    <ion-item button detail="false" (click)="onWebSiteOpen()">Visit website</ion-item>
+    <ion-item button detail="false" (click)="onContactUs()">Contact Support Team</ion-item>
+    <ion-item button detail="false" (click)="onShowSettings()">Settings</ion-item>
+  </ion-list>
+
+  <ion-button fill="solid" expand="block" color="primary" (click)="logout()">Logout</ion-button>
+</ion-content>

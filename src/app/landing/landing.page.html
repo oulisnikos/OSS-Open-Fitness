@@ -1,0 +1,19 @@
+<ion-content scroll="false">
+  <div class="splash-bg"></div>
+  <div class="splash-info">
+    <div class="splash-logo"></div>
+    <div class="splash-intro">
+      Welcome to Open Fitness {{ versionCode }} ({{ versionNumber }})
+    </div>
+  </div>
+  <div class="ion-padding">
+    <ion-button (click)="signIn()" fill="solid" expand="block" color="primary" [disabled]="loginInProgress">
+      Login
+    </ion-button>
+  </div>
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-spinner *ngIf="loginInProgress"></ion-spinner>
+    </ion-col>
+  </ion-row>
+</ion-content>

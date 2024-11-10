@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Open Fitness</string>
+    <string name="title_activity_main">Open Fitness</string>
+    <string name="package_name">gr.oss.open.fitness</string>
+    <string name="custom_url_scheme">gr.oss.open.fitness</string>
+</resources>

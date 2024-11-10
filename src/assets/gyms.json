@@ -1,0 +1,28 @@
+{
+    "gyms": [
+      {
+        "code": "1",
+        "site": "http://www.openfitness.gr"
+      },
+      {
+        "code": "484001",
+        "site": "https://lafitness.gr"
+      },
+      {
+        "code": "509901",
+        "site": "https://reshapeboutiquegym.gr"
+      },
+      {
+        "code": "606501",
+        "site": "https://pilates-therapy.gr"
+      },
+      {
+        "code": "424002",
+        "site": "https://lawest.gr"
+      },
+      {
+        "code": "199301",
+        "site": "https://tcterminal.gr"
+      }
+    ]
+}
