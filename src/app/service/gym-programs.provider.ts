@@ -20,7 +20,7 @@ import { AlertController } from "@ionic/angular";
 // import { Calendar, CalendarOptions } from "@ionic-native/calendar/ngx";
 import { Observable } from "rxjs";
 import { AppStateProvider } from "./app-state";
-import { OssAuthServiceExtension } from "./auth/extension/oss-auth-service-extension";
+import { OssAuthServiceExtension } from "./extension/oss-auth-service-extension";
 import { ContractsInfoDto } from "../models/interfaces/gym-contract.interface";
 
 @Injectable({

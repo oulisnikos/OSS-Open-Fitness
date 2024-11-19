@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { filter, switchMap, tap } from "rxjs";
-import { OssAuthServiceExtension } from "./auth/extension/oss-auth-service-extension";
+import { OssAuthServiceExtension } from "./extension/oss-auth-service-extension";
 import { AlertController, Platform } from "@ionic/angular";
 import { AuthService } from "ionic-appauth";
 import { PushNotifications } from "@capacitor/push-notifications";

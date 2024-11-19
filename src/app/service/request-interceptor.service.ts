@@ -18,7 +18,7 @@ import {
   HttpErrorResponse,
 } from "@angular/common/http";
 import { AuthService } from "ionic-appauth";
-import { OssAuthServiceExtension } from "./auth/extension/oss-auth-service-extension";
+import { OssAuthServiceExtension } from "./extension/oss-auth-service-extension";
 
 @Injectable({
   providedIn: "root",

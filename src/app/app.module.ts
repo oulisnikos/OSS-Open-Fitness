@@ -1,4 +1,4 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -7,11 +7,9 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
-import { CoreModule } from './service/auth/core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 import { PushNotificationsService } from './service/push-notifications.service';
-import { AppErrorHandler } from './service/app-error-handler';
-import { RequestInterceptorService } from './service/request-interceptor.service';
+import { CoreModule } from './service/core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
