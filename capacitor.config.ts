@@ -4,6 +4,7 @@ const config: CapacitorConfig = {
   appId: 'gr.oss.open.fitness',
   appName: 'Open Fitness',
   webDir: 'www',
+  bundledWebRuntime: false,
   cordova: {
     preferences: {
       ScrollEnabled: 'false',

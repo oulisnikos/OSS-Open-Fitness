@@ -43,13 +43,16 @@ export class LandingPage implements OnInit, OnDestroy {
 
   private onAuthEvents(action: IAuthAction) {
     console.log("🚀 ~ file: landing.page.ts ~ line 46 ~ LandingPage ~ onAuthEvents ~ action", action);
+    // Για Test
+    this.loginInProgress = false;
+
     if (action.action === AuthActions.SignInSuccess) {
-      this.loginInProgress = false;
+      // this.loginInProgress = false;
       this.navCtrl.setDirection("root");
       this.router.navigateByUrl("/tabs");
     }
     if (action.action === AuthActions.SignInFailed) {
-      this.loginInProgress = false;
+      // this.loginInProgress = false;
       this.alertController
         .create({
           header: "Signin failed",

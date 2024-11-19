@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { App } from '@capacitor/app';
 import { StatusBar } from '@capacitor/status-bar';
 import { Platform } from '@ionic/angular';
-import { AuthService } from 'ionic-appauth';
+// import { AuthService } from 'ionic-appauth';
 import { Storage} from '@ionic/storage-angular';
 import { PushNotificationsService } from './service/push-notifications.service';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { AuthService } from 'ionic-appauth';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,7 @@ export class AppComponent {
     private platform: Platform,
     private authService: AuthService,
     private storage: Storage,
-    private pushNotificationsService: PushNotificationsService
+    private pushNotification: PushNotificationsService
   ) {
     this.initializeApp();
   }
@@ -30,14 +32,23 @@ export class AppComponent {
         await this.storage.create();
         console.log("Storage initialized successfully!");
 
-        // Initialize AuthService
-        await this.authService.init();
-        console.log("Authorization Service initialize successfully!");
-
-        this.pushNotificationsService.bootstrapPushNotifications();
-
+        try {
+          // Initialize AuthService
+          await this.authService.init();
+          console.log("Authorization Service initialize successfully!");
+        }catch(error) {
+          console.log("An occured on Auth Service Initiliazation ", error);
+        }
+        try {
+          this.pushNotification.bootstrapPushNotifications();
+        } catch(error) {
+          console.log("An error occured in bootstrapPushNotification ", error)
+        }
+        
         StatusBar.setBackgroundColor({color: "#b42770"});
         StatusBar.show();
+        SplashScreen.hide();
+
       } catch(error) {
         console.log("An error occured on Application initialization ->", error);
       }

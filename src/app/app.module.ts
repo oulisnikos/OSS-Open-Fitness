@@ -7,20 +7,27 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { CoreModule } from './service/auth/core/core.module';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './service/auth/core/core.module';
+import { PushNotificationsService } from './service/push-notifications.service';
 import { AppErrorHandler } from './service/app-error-handler';
 import { RequestInterceptorService } from './service/request-interceptor.service';
-import { PushNotificationsService } from './service/push-notifications.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule, CoreModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(), 
+    CoreModule,
+    HttpClientModule
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: ErrorHandler, useClass: AppErrorHandler },
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true },
-    PushNotificationsService
+    // { provide: ErrorHandler, useClass: AppErrorHandler },
+    // { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true },
+    PushNotificationsService,
   ],
   bootstrap: [AppComponent],
 })

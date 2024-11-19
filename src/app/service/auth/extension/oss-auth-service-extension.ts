@@ -1,8 +1,7 @@
-import { jwtDecode } from 'jwt-decode';
 import { Injectable, OnDestroy } from "@angular/core";
 import { Observable, from, Subscription } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
-import { IOssAuth } from "./oss-auth.interface";
+import { IOssAuth, IOssAuthUser } from "./oss-auth.interface";
 import { AuthService } from "ionic-appauth";
 import { TokenResponse } from "@openid/appauth";
 
@@ -10,28 +9,48 @@ import { TokenResponse } from "@openid/appauth";
   providedIn: "root",
 })
 export class OssAuthServiceExtension implements IOssAuth, OnDestroy {
-  token$: Subscription;
+  user$ = this.auth.user$;
+  userSub: Subscription;
+  token$ = this.auth.token$;
+  tokenSub: Subscription;
   tokenResponse!: TokenResponse;
+  userInfo!: IOssAuthUser;
   constructor(private auth: AuthService) {
-    this.token$ = auth.token$.subscribe((tokenResponse) => {
+    this.tokenSub = this.token$.subscribe((tokenResponse) => {
       console.log("current Access Token", tokenResponse?.accessToken);
       this.tokenResponse = tokenResponse;
+    });
+    this.userSub = this.user$.subscribe((connected) => {
+      console.log("Current connected user. ", connected);
+      this.userInfo = JSON.parse(JSON.stringify(connected));
     });
   }
 
   ngOnDestroy(): void {
-    if (this.token$) {
+    if (this.tokenSub) {
       console.log("unsubscribe token$ on interceptor");
-      this.token$.unsubscribe();
+      this.tokenSub.unsubscribe();
+    }
+    if (this.userSub) {
+      console.log("unsubscribe user$ on interceptor");
+      this.userSub.unsubscribe();
     }
   }
 
+  async getConnectedUser() {
+    await this.auth.loadUserInfo();
+  }
+
   getOssClientId(): number {
-    return this.getIdTokenObject()?.mobile_client_id;
+    return this.userInfo.mobile_client_id;
+    // OLD
+    //return this.getIdTokenObject()?.mobile_client_id;
   }
 
   getOssApiRouting(): string {
-    return this.getIdTokenObject()?.mobile_api_routing;
+    return this.userInfo.mobile_api_routing;
+    // OLD
+    //return this.getIdTokenObject()?.mobile_api_routing;
   }
 
   public getAccessToken(): string {
@@ -58,18 +77,20 @@ export class OssAuthServiceExtension implements IOssAuth, OnDestroy {
     if (!this.tokenResponse || !this.tokenResponse.accessToken) {
       return null;
     }
-    return jwtDecode(this.tokenResponse.accessToken);
+    return this.tokenResponse.accessToken;//jwtDecode(this.tokenResponse.accessToken);
   }
 
-  public getIdTokenObject(): any {
-    if (!this.tokenResponse || !this.tokenResponse.idToken) {
-      return null;
-    }
+  // public getIdTokenObject(): any {
+  //   if (!this.tokenResponse || !this.tokenResponse.idToken) {
+  //     return null;
+  //   }
 
-    return jwtDecode(this.tokenResponse.idToken);
-  }
+  //   return jwtDecode(this.tokenResponse.idToken);
+  // }
 
   public getOssUserName(): string {
-    return this.getIdTokenObject().preferred_username;
+    return this.userInfo.preferred_username;
+    // OLD
+    //return this.getIdTokenObject().preferred_username;
   }
 }

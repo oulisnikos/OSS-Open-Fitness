@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 // import { AppVersion } from "@ionic-native/app-version/ngx";
 // TODO: Replace @ionic-native/email-composer
 // import { EmailComposer } from "@ionic-native/email-composer/ngx";
@@ -8,25 +8,30 @@ import { AlertController, IonRouterOutlet, ModalController } from "@ionic/angula
 import { Router } from "@angular/router";
 // FIXME: When copy Settings component from original project
 // import { SettingsPage } from "../../settings/settings.page";
-import { AuthService } from "ionic-appauth";
+// import { AuthService } from "ionic-appauth";
 import { App } from "@capacitor/app";
 import { Device } from "@capacitor/device";
 import { AppStateProvider } from "src/app/service/app-state";
 import { GymProgramsProvider } from "src/app/service/gym-programs.provider";
 import { WebViewCache } from "capacitor-plugin-webview-cache";
 import { PushNotificationsService } from "src/app/service/push-notifications.service";
+import { Subscription } from "rxjs";
+import { OssAuthServiceExtension } from "src/app/service/auth/extension/oss-auth-service-extension";
+import { AuthActions, AuthService, IAuthAction } from "ionic-appauth";
 
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.page.html",
   styleUrls: ["./profile.page.scss"],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage implements OnInit, OnDestroy {
   versionCode!: string | number;
   versionNumber!: string;
   userData: any = {};
+  authEventSub!: Subscription;
   constructor(
     private authService: AuthService,
+    private ossextension: OssAuthServiceExtension,
     public appState: AppStateProvider,
     private alertCtrl: AlertController,
     private gymPrograms: GymProgramsProvider,
@@ -45,24 +50,32 @@ export class ProfilePage implements OnInit {
         this.versionNumber = info.version;
       })
   }
+  ngOnDestroy(): void {
+    this.authEventSub.unsubscribe();
+  }
 
   ngOnInit() {
-    this.authService.user$.subscribe((result) => {
-      this.userData = result;
+    console.log("OnInit Profile page method running.");
+    this.authEventSub = this.authService.events$.subscribe((action) => this.onSignOutSuccess(action));
+
+    this.ossextension.getConnectedUser().then(() => {
+      this.userData = this.ossextension.userInfo;
     });
   }
 
-  ionViewDidEnter() {
-    this.authService.loadUserInfo();
+  private onSignOutSuccess(action: IAuthAction) {
+    console.log("Auth Action ", action);
+    if (action.action === AuthActions.SignOutSuccess) {
+      console.log("Unregister Notification.");
+      this.notification.unregisterPushNotifications(true);
+      this.appState.initState();
+      console.log("Navigate to landing page.");
+      this.router.navigateByUrl("/landing");
+    }
+  }
 
-    // (window as any).CacheClear(
-    //   () => {
-    //     console.log("clear cache success");
-    //   },
-    //   () => {
-    //     console.log("clear cache error");
-    //   }
-    // );
+  ionViewDidEnter() {
+    // COMPLETE: Problem with old code CLear Cache
     WebViewCache.clearCache().then(
       () => {
         console.log("clear cache success");
@@ -83,10 +96,9 @@ export class ProfilePage implements OnInit {
         {
           text: "Log Out",
           handler: async () => {
-            this.appState.initState();
-            this.notification.unregisterPushNotifications(true);
+            // this.appState.initState();
+            console.log("This is authidication plugin configuration ", this.authService.authConfig);
             await this.authService.signOut();
-            this.router.navigateByUrl("/landing");
           },
         },
       ],
