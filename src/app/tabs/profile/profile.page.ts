@@ -16,7 +16,7 @@ import { GymProgramsProvider } from "src/app/service/gym-programs.provider";
 import { WebViewCache } from "capacitor-plugin-webview-cache";
 import { PushNotificationsService } from "src/app/service/push-notifications.service";
 import { Subscription } from "rxjs";
-import { OssAuthServiceExtension } from "src/app/service/auth/extension/oss-auth-service-extension";
+import { OssAuthServiceExtension } from "src/app/service/extension/oss-auth-service-extension";
 import { AuthActions, AuthService, IAuthAction } from "ionic-appauth";
 
 @Component({
@@ -86,24 +86,28 @@ export class ProfilePage implements OnInit, OnDestroy {
   }
 
   async logout() {
-    const confirm = await this.alertCtrl.create({
-      header: "Logout!",
-      message: "Would you like to log out of the Open Fitness App?",
-      buttons: [
-        {
-          text: "Cancel",
-        },
-        {
-          text: "Log Out",
-          handler: async () => {
-            // this.appState.initState();
-            console.log("This is authidication plugin configuration ", this.authService.authConfig);
-            await this.authService.signOut();
-          },
-        },
-      ],
-    });
-    confirm.present();
+    await this.authService.signOut();
+    // const confirm = await this.alertCtrl.create({
+    //   header: "Logout!",
+    //   message: "Would you like to log out of the Open Fitness App?",
+    //   htmlAttributes: {
+    //     "aria-hidden": false
+    //   },
+    //   buttons: [
+    //     {
+    //       text: "Cancel",
+    //     },
+    //     {
+    //       text: "Log Out",
+    //       handler: async () => {
+    //         // this.appState.initState();
+    //         console.log("This is authidication plugin configuration ", this.authService.authConfig);
+    //         await this.authService.signOut();
+    //       },
+    //     },
+    //   ],
+    // });
+    // confirm.present();
   }
 
   async onContactUs() {

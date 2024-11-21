@@ -22,7 +22,7 @@ export class OssAuthServiceExtension implements IOssAuth, OnDestroy {
     });
     this.userSub = this.user$.subscribe((connected) => {
       console.log("Current connected user. ", connected);
-      this.userInfo = JSON.parse(JSON.stringify(connected));
+      this.userInfo = {...connected};
     });
   }
 

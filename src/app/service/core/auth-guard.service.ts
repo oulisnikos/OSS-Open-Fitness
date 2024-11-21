@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     private auth: AuthService,
-    private navCtrl: NavController,
+    private navCtrl: NavController
     ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate {
       switchMap(() => this.auth.isAuthenticated$),
       tap(isAuthenticated => {
         if(!isAuthenticated) {
-          this.navCtrl.navigateRoot('landing')
+          this.navCtrl.navigateRoot('landing');
         }
       }),
     );
