@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title
+      >{{ plano.dtBe | date:'dd.MM.yyyy' }} {{ plano.dtBe | date:'HH:mm' }}-{{ plano.dtEn |
+      date:'HH:mm'}}</ion-title
+    >
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scrollEvents="true" appAnimatedFab="animated-fab">
+  <ion-card>
+    <img [src]="aithousaPhotoUrl" />
+    <ion-card-content>
+      <ion-card-title>
+        {{ plano.mathimaDescr }}
+        <h2>{{ plano.aithousaDescr }}</h2>
+      </ion-card-title>
+      <p>{{ programDescription }}</p>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="gymAvatar()" />
+        </ion-avatar>
+        <h2>{{ plano.gymnasthsName }}</h2>
+      </ion-item>
+      <p>{{ biografiko }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <ion-fab *ngIf="plano.acti !== 1 || plano.sta2 === 3" horizontal="center" vertical="bottom">
+    <ion-fab-button *ngIf="plano.acti == 2" class="fab-auto-hide" color="primary" (click)="onBookNow(true)">
+      Book Now
+    </ion-fab-button>
+    <ion-fab-button *ngIf="plano.acti == 3" class="fab-auto-hide" color="danger" (click)="onBookNow(false)">
+      Cancel Booking
+    </ion-fab-button>
+    <ion-fab-button
+      *ngIf="plano.acti == 4 || plano.sta2 === 3"
+      class="fab-auto-hide"
+      color="secondary"
+      (click)="onCall()"
+    >
+      <ion-icon name="call"> </ion-icon>
+      Call Now
+    </ion-fab-button>
+  </ion-fab> -->
+  <ion-fab *ngIf="plano.acti !== 1 || plano.sta2 === 3" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button *ngIf="plano.acti == 2" color="primary" class="animated-fab" (click)="onBookNow(true)">
+      <ion-icon name="checkmark"></ion-icon>
+      <span>Book Now</span>
+    </ion-fab-button>
+    <ion-fab-button *ngIf="plano.acti == 3" color="danger" class="animated-fab" (click)="onBookNow(false)">
+      <ion-icon name="close"></ion-icon>
+      <span>Cancel Now</span>
+    </ion-fab-button>
+    <ion-fab-button
+      *ngIf="plano.acti == 4 || plano.sta2 === 3"
+      color="secondary"
+      class="animated-fab"
+      (click)="onCall()"
+    >
+      <ion-icon name="call"></ion-icon>
+      <span>Call Now</span>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

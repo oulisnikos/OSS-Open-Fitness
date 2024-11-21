@@ -50,6 +50,7 @@ export class RequestInterceptorService implements HttpInterceptor {
     return next.handle(this.addHeaders(request, this.ossAuthExtension.getAccessToken())).pipe(
       catchError((error) => {
         if (error instanceof HttpErrorResponse) {
+          console.log("Is Http error ", error);
           switch ((<HttpErrorResponse>error).status) {
             // case 400:
             //   return this.handle400Error(error);
@@ -59,6 +60,7 @@ export class RequestInterceptorService implements HttpInterceptor {
               return observableThrowError(error);
           }
         } else {
+          console.log("Is other kind of error ", error);
           return observableThrowError(error);
         }
       })
@@ -66,11 +68,14 @@ export class RequestInterceptorService implements HttpInterceptor {
   }
 
   addHeaders(request: HttpRequest<any>, accessToken: string): HttpRequest<any> {
-    return request.clone({
+    console.log("Before clone request");
+    const requestResult = request.clone({
       setHeaders: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+    console.log("After clone ", requestResult);
+    return requestResult;
   }
   // handle400Error(error) {
   //   if (error && error.status === 400 && error.error && error.error.error === "invalid_grant") {

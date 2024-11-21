@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Filter
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        shape="round"
+        (click)="onDoFilterEvent($event)"
+      >
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div *ngIf="loading">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+  <!-------------------------------------->
+  <div *ngIf="!loading">
+    <ion-list *ngFor="let genFilter of getFilters">
+      <ion-list-header>
+          <ion-title style="text-align: center;">{{ genFilter?.filterName }}</ion-title>
+      </ion-list-header>
+      <ion-item>
+        <ion-label style="font-weight: bold;" color="dark">Select All</ion-label>
+        <ion-checkbox slot="start"
+          [(ngModel)]="genFilter.masterCheck"
+          [indeterminate]="genFilter?.isIndeterminate"
+          (click)="checkMaster($event, genFilter)"
+          slot="end"
+        >
+        </ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngFor="let epil of genFilter?.filters">
+        <ion-label>{{ epil?.caption }}</ion-label>
+        <ion-checkbox
+          slot="end"
+          color="primary"
+          [(ngModel)]="epil.checked"
+          (ionChange)="checkEvent($event, genFilter)"
+        ></ion-checkbox>
+      </ion-item>
+
+      <ion-item-divider></ion-item-divider>
+    </ion-list>
+  </div>
+</ion-content>
+<!--<ion-fab vertical="bottom" horizontal="end">
+  <ion-fab-button (click)="onDoFilterEvent($event)" color="primary">
+    <ion-icon name="funnel-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>-->
+
+<!--<ion-footer class="ion-no-border">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button
+          shape="round"
+          slot="start"
+          (click)="onDoFilterEvent($event)"
+          color="primary"
+
+        >
+          OK
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button
+          shape="round"
+          slot="end"
+          (click)="onExit($event)"
+          color="danger"
+        >
+          Cancel
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>-->

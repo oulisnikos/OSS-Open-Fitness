@@ -1,36 +1,48 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { TabsPage } from './tabs.page';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { TabsPage } from "./tabs.page";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "tabs",
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: "messages",
+        loadChildren: () => import("./messages/messages.module").then((m) => m.MessagesPageModule),
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: "explore",
+        loadChildren: () => import("./explore/explore.module").then((m) => m.ExplorePageModule),
       },
       {
-        path: 'profile',
-        loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
+        path: "my-schedule",
+        loadChildren: () => import("./my-schedule/my-schedule.module").then((m) => m.MySchedulePageModule),
       },
       {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-      }
-    ]
+        path: "profile",
+        loadChildren: () => import("./profile/profile.module").then((m) => m.ProfilePageModule),
+      },
+      {
+        path: "contracts",
+        loadChildren: () => import("./contracts/contracts.module").then((m) => m.ContractsPageModule),
+      },
+      {
+        path: "",
+        redirectTo: "tabs/explore",
+        pathMatch: "full",
+      },
+    ],
   },
-  // {
-  //   path: '',
-  //   redirectTo: '/tabs/tab1',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: "",
+    redirectTo: "tabs/explore",
+    pathMatch: "full",
+  },
+  {
+    path: "profile",
+    loadChildren: () => import("./profile/profile.module").then((m) => m.ProfilePageModule),
+  },
 ];
 
 @NgModule({

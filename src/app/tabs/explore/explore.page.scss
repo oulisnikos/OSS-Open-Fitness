@@ -1,0 +1,60 @@
+.item-button {
+  border-radius: 40px !important;
+  padding: 0 1em !important;
+}
+ion-avatar {
+  margin-right: 8px !important;
+  img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 50px !important; //any size
+    max-height: 50px !important; //any size
+  }
+}
+span.status {
+  float: right;
+  margin: -6px 0 0 0 !important;
+  button {
+    margin: 0;
+    padding: 0 0 0 4px;
+    ion-icon {
+      padding: 0.15em;
+    }
+  }
+}
+.hour {
+  font-size: 0.7em;
+}
+.item-block {
+  padding-left: 8px !important;
+}
+
+.button-top-right {
+  margin-bottom: 0;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+#filter-button {
+  position: relative;
+  width: 100%;
+  top:1px;
+  right: 1px;
+  overflow: visible!important;
+}
+
+
+#filter-badge {
+  background-color:orange;
+  position: absolute;
+  top: 0px;
+  right: -6px;
+  border-radius: 100%;
+}
+
+.wlist-badge {
+  position: fixed;
+  border-radius: 11px;
+  //margin: 15px 0px 0px 0px;
+  height: 25px;
+}

@@ -48,7 +48,7 @@ export class PlanoFilter {
         });
 
         vfilters.filters.forEach((filter, filtrIndex) => {
-          let iiplana: Plano[] = null;
+          let iiplana: Plano[];
 
           if(filtrIndex > 0) {
             iiplana = vplana;

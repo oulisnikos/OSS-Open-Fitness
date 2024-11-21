@@ -6,7 +6,7 @@ import { isEqual } from "date-fns";
 })
 export class UtilsService {
   public getDateWithoutTime(d: Date): Date {
-    let cleanedDate: Date;
+    let cleanedDate: Date = new Date();
     if (d) {
       cleanedDate = new Date(d);
       cleanedDate.setHours(0, 0, 0, 0);

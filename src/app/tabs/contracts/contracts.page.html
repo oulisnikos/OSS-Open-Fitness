@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button shape="round" (click)="changeCardView()">
+        <ion-icon slot="icon-only" [name]="icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Contracts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="loadInfo($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row class="ion-text-center" *ngIf="loading">
+    <ion-col>
+      <ion-spinner></ion-spinner>
+    </ion-col>
+  </ion-row>
+
+  <div  *ngFor="let cont of contracts?.cardInfo">
+    <ion-card *ngIf="hasCardNumber(cont) && cont?.cardType === 'bc' && appState.appPreferences.selectedViewType === bcViewType" @fadein>
+      <ion-card-header @slidelefttitle>
+        <h3>{{ cont?.caption }}</h3>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row class="qr-bc">
+            <ngx-barcode6
+              style="align-content: center;"
+              [bc-value]="cont.cardNumber"
+              [bc-display-value]="true"
+
+            ></ngx-barcode6>
+          <ion-text *ngIf="!hasCardNumber(cont)"><h6>Not Provided</h6></ion-text>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="hasCardNumber(cont) && cont?.cardType === 'qr' && appState.appPreferences.selectedViewType === qrViewType" @fadein>
+      <ion-card-header @slidelefttitle>
+        <h3>{{ cont?.caption }}</h3>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row class="qr-bc">
+            <qrcode
+              [qrdata]="cont.cardNumber"
+              [width]="256"
+              [errorCorrectionLevel]="'M'"
+            ></qrcode>
+          <ion-text *ngIf="!hasCardNumber(cont)"><h6>Not Provided</h6></ion-text>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-card *ngFor="let cont of contracts?.contracts">
+    <ion-card-header @slidelefttitle><h3>{{ cont?.contractCaption }}</h3></ion-card-header>
+
+    <ion-card-content @fadein>
+      <ion-text>
+        <div *ngFor="let contRow of cont?.detailRows">
+          <span *ngIf="contRow?.caption" color="dark"><b>{{ contRow?.caption }}:</b> </span>
+          <span *ngIf="contRow?.valueLblString">{{ contRow?.valueLblString }}</span>
+          <span *ngIf="contRow?.valueLblNumber">{{ contRow?.valueLblNumber }}</span>
+        </div>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

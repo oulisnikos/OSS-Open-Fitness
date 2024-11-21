@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Timetable</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button
+        [disabled]="!listData || !listData.plana || listData.plana.length < 1"
+        id="filter-button"
+        (click)="showFilters($event)"
+      >
+        <ion-badge id="filter-badge" color="warning">{{ selectedFiltered }}</ion-badge>
+        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <fancy-date-picker
+    [expanded]="true"
+    (changed)="onDateRangeChanged($event)"
+    (resize)="resizeContent($event)"
+  >
+  </fancy-date-picker>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Timetable</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+  <ion-refresher slot="fixed" (ionRefresh)="loadPlana($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list
+    class="ion-no-padding"
+    *ngIf="filteredPlana && filteredPlana.length"
+    [@animateStagger]="{ value: '100' }"
+  >
+    <ion-item
+      button
+      detail="false"
+      [@animate]="{ value: '*', params: { y: '100%' } }"
+      *ngFor="let plano of filteredPlana; let i = index;"
+      (click)="onLoadPlanoPage(plano, i)"
+    >
+      <ion-avatar slot="start">
+        <img [src]="gymAvatar(plano)" />
+      </ion-avatar>
+      <ion-label class="ion-no-padding">
+        <span class="hour"> {{ plano.dtBe | date: "HH:mm" }} - {{ plano.dtEn | date: "HH:mm" }} </span>
+        <span class="status">
+          <ion-button
+            mode="md"
+            class="button-top-right"
+            fill="clear"
+            size="small"
+            color="primary"
+            shape="round"
+          >
+            <ion-icon slot="start" name="heart" *ngIf="plano.std1 === 'BOOKED'"></ion-icon>
+            <ion-icon
+              slot="start"
+              name="heart-outline"
+              *ngIf="plano.std1 !== 'BOOKED' && plano.std1 !== 'BOOKWLIST'"
+            ></ion-icon>
+            <ion-icon slot="start" name="timer" *ngIf="plano.std1 === 'BOOKWLIST'"></ion-icon>
+            {{ plano.std1 }}
+            <span *ngIf="plano?.wlistOrder">
+              {{ " [" + plano?.wlistOrder + "]" }}
+            </span>
+          </ion-button>
+          <ion-button
+            mode="md"
+            *ngIf="plano.sta2 !== 3"
+            class="button-top-right"
+            fill="clear"
+            size="small"
+            color="secondary"
+            shape="round"
+          >
+            <ion-icon name="arrow-redo"></ion-icon>
+            {{ plano.std2 }}
+          </ion-button>
+          <ion-button
+            mode="md"
+            *ngIf="plano.sta2 === 3"
+            class="button-top-right"
+            fill="clear"
+            size="small"
+            color="secondary"
+            shape="round"
+            (click)="onCall($event)"
+          >
+            <ion-icon name="call"></ion-icon>
+            {{ plano.std2 }}
+          </ion-button>
+        </span>
+        <h2>{{ plano.mathimaDescr }}</h2>
+        <p>
+          {{ plano.aithousaDescr }} w/{{ plano.gymnasthsName }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

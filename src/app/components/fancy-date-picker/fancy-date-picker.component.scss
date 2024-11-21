@@ -1,0 +1,76 @@
+$date-picker-height: 130px;
+.main-div {
+  background-color: white;
+}
+.date-picker-container {
+  height: $date-picker-height;
+  .date-picker {
+    height: $date-picker-height;
+  }
+  .date-picker-placeholder {
+    height: 100%;
+    background-color: rgb(243, 243, 243);
+  }
+}
+.datepicker-slide {
+  // background-color: lightgreen;
+  height: 72px;
+}
+.day-button {
+  border-radius: 50px !important;
+  width: 33px !important;
+  height: 33px !important;
+  padding: 0 !important;
+  span {
+    padding-top: 1px;
+  }
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --border-width: 1px;
+}
+.range-time {
+  margin-left: 18px !important;
+  margin-right: 18px !important;
+  margin-top: -6px !important;
+}
+.range-pin {
+  display: none !important;
+}
+.short-week-day {
+  color: silver;
+  font-size: 0.7em;
+}
+.range-labels-grid {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.col {
+  .label {
+    margin: 0;
+  }
+}
+button {
+  span {
+    .icon {
+      margin-left: 10px !important;
+    }
+  }
+}
+.range-bar {
+  height: 2px !important;
+}
+
+.month-left {
+  float: left;
+  margin-left: 15px;
+}
+
+.month-right {
+  float: right;
+  margin-right: 15px;
+}
+
+.column-center {
+  justify-content: center;
+  display: flex;
+}

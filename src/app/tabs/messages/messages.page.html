@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Messages</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+  <ion-row class="ion-text-center" *ngIf="loading && !appState.infoMessages">
+    <ion-col>
+      <ion-spinner></ion-spinner>
+    </ion-col>
+  </ion-row>
+  <ion-card *ngIf="appState.infoMessages">
+    <ion-card-header>
+      <strong>{{appState.infoMessages.criticalTitle}}</strong>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let msg of appState.infoMessages?.critical">
+        <ion-chip outline color="warning">
+          <ion-label>{{msg.typosDescr}}</ion-label>
+        </ion-chip>
+        {{ msg.keimeno }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="appState.infoMessages">
+    <ion-card-header>
+      <strong>{{appState.infoMessages.kanonismoiTitle}}</strong>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let msg of appState.infoMessages?.kanonismoi">
+        <ion-chip outline color="warning">
+          <ion-label>{{msg.typosDescr}}</ion-label>
+        </ion-chip>
+        {{ msg.keimeno }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="appState.infoMessages">
+    <ion-card-header>
+      <strong>{{appState.infoMessages.sxoliaTitle}}</strong>
+    </ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let msg of appState.infoMessages?.sxolia">
+        <ion-chip outline color="secondary">
+          <ion-label>{{msg.typosDescr}}</ion-label>
+        </ion-chip>
+        {{ msg.keimeno }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
