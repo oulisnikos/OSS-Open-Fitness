@@ -15,7 +15,7 @@
       <ion-spinner></ion-spinner>
     </ion-col>
   </ion-row>
-  <ion-card *ngIf="appState.infoMessages">
+  <ion-card *ngIf="listIsEmpty(appState.infoMessages?.critical)">
     <ion-card-header>
       <strong>{{appState.infoMessages.criticalTitle}}</strong>
     </ion-card-header>
@@ -29,7 +29,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="appState.infoMessages">
+  <ion-card *ngIf="listIsEmpty(appState.infoMessages?.kanonismoi)">
     <ion-card-header>
       <strong>{{appState.infoMessages.kanonismoiTitle}}</strong>
     </ion-card-header>
@@ -43,7 +43,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngIf="appState.infoMessages">
+  <ion-card *ngIf="listIsEmpty(appState.infoMessages?.sxolia)">
     <ion-card-header>
       <strong>{{appState.infoMessages.sxoliaTitle}}</strong>
     </ion-card-header>

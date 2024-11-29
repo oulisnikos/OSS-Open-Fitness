@@ -96,6 +96,7 @@
         [(ngModel)]="timeRange"
         color="primary"
         (ionChange)="updateDateFromAndDateTo()"
+        (ionKnobMoveEnd)="updateOnSlide()"
       >
       </ion-range>
     </div>

@@ -17,4 +17,12 @@ export class MessagesPage {
       this.loading = false;
     });
   }
+
+  listIsEmpty(ls: any[] | undefined) : boolean {
+    if(ls && ls.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

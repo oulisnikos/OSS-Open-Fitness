@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: "landing",
-    loadChildren: () => import('./landing/landing.module').then(m => m.LandingPageModule)
+    loadChildren: () => import('./landing/landing.module').then(m => m.LandingPageModule),
   },
   {
     path: "tabs",
@@ -18,7 +18,7 @@ const routes: Routes = [
     loadChildren: () => import("./tabs/tabs.module").then(m => m.TabsPageModule)
   },
   //{ path: 'auth/callback', loadChildren: () => import("./service/auth/auth-callback/auth-callback.module").then(m => m.AuthCallbackPageModule) },
-  //{ path: 'auth/endsession', loadChildren: () => import("./service/auth/end-session/end-session.module").then(m => m.EndSessionPageModule) },
+  //{ path: 'endsession', loadChildren: () => import("./service/auth/end-session/end-session.module").then(m => m.EndSessionPageModule) },
 ];
 @NgModule({
   imports: [

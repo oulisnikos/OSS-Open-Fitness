@@ -61,6 +61,7 @@ export class PushNotificationsService {
 
   unregisterPushNotifications(isAuthenticated: boolean) {
     if(isAuthenticated) {
+      console.log("Before unsubscribe. ", this.ossAuthExtension.getOssUserName());
       FCM.unsubscribeFrom({topic: this.ossAuthExtension.getOssUserName()})
       .then((r) => {
         PushNotifications.unregister();

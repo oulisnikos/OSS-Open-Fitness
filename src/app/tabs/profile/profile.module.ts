@@ -8,11 +8,12 @@ import { ProfilePageRoutingModule } from "./profile-routing.module";
 
 import { ProfilePage } from "./profile.page";
 import { PushNotificationsService } from "src/app/service/push-notifications.service";
+import { SettingsPage } from "src/app/settings/settings.page";
 // import { AppVersion } from "@ionic-native/app-version/ngx";
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, ProfilePageRoutingModule],
-  declarations: [ProfilePage],
+  declarations: [ProfilePage, SettingsPage],
   providers: [PushNotificationsService],
 })
 export class ProfilePageModule {}

@@ -3,8 +3,6 @@ import { GenFilter } from './../../models/interfaces/filter.interface';
 import { PlanoFilterComponent } from './../../components/plano-filter/plano-filter.component';
 import { Component, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-// TODO: Replace @ionic-native/call-number
-// import { CallNumber } from "@ionic-native/call-number/ngx";
 import {
   IonContent,
   IonRouterOutlet,
@@ -18,6 +16,9 @@ import { AppStateProvider } from "./../../service/app-state";
 import { GymProgramsProvider } from "./../../service/gym-programs.provider";
 import { UtilsService } from "./../../service/utils/utils.service";
 import { PlanoPage } from "../../plano/plano.page";
+import { OpswCallNumber } from 'src/app/service/call-number.service';
+import { OssAuthServiceExtension } from 'src/app/service/extension/oss-auth-service-extension';
+import { Network } from '@capacitor/network';
 
 @Component({
   selector: "app-explore",
@@ -32,26 +33,35 @@ export class ExplorePage {
   filteredPlana: Plano[] = [];
   private genFilter: GenFilter = {filters: []};
   @ViewChild("content") content!: IonContent;
+  isConnected: boolean = true;
 
   constructor(
     private router: Router,
     private gymProgramProvider: GymProgramsProvider,
     public appState: AppStateProvider,
-    //TODO: Inject new class of CallNumber
-    // private call: CallNumber,
     public utils: UtilsService,
     private routerOutlet: IonRouterOutlet,
     private modalCtrl: ModalController,
+    private opswCallNum: OpswCallNumber,
+    private ossAuthExt: OssAuthServiceExtension
   ) {
     this.listData = this.appState.explorePlanaDay;
+    setInterval(() => {
+      Network.getStatus().then((valStat) => {
+        this.isConnected = valStat.connected;
+      });
+    });
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
+    console.log("Ion view did enter and after load plana if empty.");
+    await this.ossAuthExt.getConnectedUser();
     this.loadListIfEmpty();
   }
 
   private loadListIfEmpty() {
-    if (this.listData.plana.length !== 0) {
+    console.log("Data ", this.listData.plana);
+    if (this.listData.plana.length > 0) {
       return;
     }
     this.simulateRefresher();
@@ -126,14 +136,10 @@ export class ExplorePage {
     return plano.gymnasthsPhotoUrl.replace("rest.", "cdn.");
   }
 
+  // COMPLETE 
   // TODO: Fix this Method Because use CallNumber
   async onCall(event: MouseEvent) {
-    // event.stopPropagation();
-    // try {
-    //   await this.call.callNumber(this.listData.stoixeiaEtaireias.tilefonoEpikoinonias1, true);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    await this.opswCallNum.call_number(this.listData.stoixeiaEtaireias.tilefonoEpikoinonias1);
   }
 
   resizeContent(expanded: any) {
@@ -151,6 +157,9 @@ export class ExplorePage {
       backdropDismiss: true,
       keyboardClose: true,
       showBackdrop: false,
+      htmlAttributes: {
+        "aria-hidden": false
+      }
     });
 
     await modal.present();

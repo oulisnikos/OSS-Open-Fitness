@@ -16,9 +16,9 @@ const config: CapacitorConfig = {
       SplashScreenDelay: '3000'
     }
   },
-  // android: {
-  //   allowMixedContent: true
-  // },
+  android: {
+    allowMixedContent: true
+  },
   plugins: {
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"]

@@ -4,6 +4,7 @@ import { GymListingNew } from "./../models/gym-listing.new";
 import { Plano } from "./../models/interfaces/gym-program.interface";
 import { AppStateProvider } from "./../service/app-state";
 import { GymProgramsProvider } from "./../service/gym-programs.provider";
+import { OpswCallNumber } from "../service/call-number.service";
 
 @Component({
   selector: "app-plano",
@@ -24,7 +25,8 @@ export class PlanoPage implements OnInit {
     private appState: AppStateProvider,
     private gympProgramProvider: GymProgramsProvider,
     // private call: CallNumber,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private opswCallNum: OpswCallNumber
   ) {
     this.plano = navParams.get("plano");
     this.gymLists = navParams.get("gymLists");
@@ -96,7 +98,9 @@ export class PlanoPage implements OnInit {
     // } catch (error) {
     //   console.log(error);
     // }
+    await this.opswCallNum.call_number(this.gymLists.stoixeiaEtaireias.tilefonoEpikoinonias1);
   }
+  
   closeModal() {
     this.modalController.dismiss();
   }

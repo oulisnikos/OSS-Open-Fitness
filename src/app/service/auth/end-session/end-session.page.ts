@@ -13,6 +13,7 @@ export class EndSessionPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("EndSession Page created...");
     this.auth.endSessionCallback();
     this.navCtrl.navigateRoot('landing');
   }

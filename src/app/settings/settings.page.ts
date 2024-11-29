@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 // import { Calendar } from "@ionic-native/calendar/ngx";
 import { AlertController, ModalController, Platform } from "@ionic/angular";
-import { AppStateProvider } from "../../services/app-state/app-state";
+import { AppStateProvider } from "../service/app-state";
+
 
 @Component({
   selector: "app-settings",
@@ -9,7 +10,7 @@ import { AppStateProvider } from "../../services/app-state/app-state";
   styleUrls: ["./settings.page.scss"],
 })
 export class SettingsPage {
-  calendars: any[];
+  calendars: any[] = [];
 
   constructor(
     public appState: AppStateProvider,

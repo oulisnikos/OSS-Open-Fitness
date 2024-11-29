@@ -1,7 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>Timetable</ion-title>
-
     <ion-buttons slot="end">
       <ion-button
         [disabled]="!listData || !listData.plana || listData.plana.length < 1"
@@ -13,6 +12,9 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <div class="connection-label" *ngIf="!isConnected">
+    Lost Connection
+  </div>
   <fancy-date-picker
     [expanded]="true"
     (changed)="onDateRangeChanged($event)"

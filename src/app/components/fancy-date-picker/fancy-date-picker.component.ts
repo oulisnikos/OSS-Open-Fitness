@@ -2,6 +2,10 @@ import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { addDays, isEqual, format, addMinutes } from "date-fns";
 import { trigger, transition, style, animate, state, sequence } from "@angular/animations";
 import { UtilsService } from "./../../service/utils/utils.service";
+import { register } from 'swiper/element/bundle';
+
+// To register swiper.js
+register();
 
 @Component({
   selector: "fancy-date-picker",
@@ -103,8 +107,17 @@ export class FancyDatePickerComponent implements OnInit {
     return this.isToday(date) ? "Today" : format(date, "ddd, MMM DD, YYYY");
   }
 
-  public updateDateFromAndDateTo() {
+  public updateOnSlide() {
+    console.log("on end slide fired....");
     console.log("Update DateFrom and DateTo!!!");
+    this.dateFrom = addMinutes(this.utils.getDateWithoutTime(this.selectedDate), this.timeRange.lower * 30);
+    this.dateTo = addMinutes(this.utils.getDateWithoutTime(this.selectedDate), this.timeRange.upper * 30);
+    this.emmitChanged();
+  }
+
+  public updateDateFromAndDateTo() {
+    //console.log("Update DateFrom and DateTo!!!");
+    console.log("On Change fired");
     this.dateFrom = addMinutes(this.utils.getDateWithoutTime(this.selectedDate), this.timeRange.lower * 30);
     this.dateTo = addMinutes(this.utils.getDateWithoutTime(this.selectedDate), this.timeRange.upper * 30);
     this.emmitChanged();

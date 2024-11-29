@@ -58,3 +58,25 @@ span.status {
   //margin: 15px 0px 0px 0px;
   height: 25px;
 }
+
+
+
+
+
+.connection-label {
+  background-color: #ff4d4d; /* Red background */
+  color: white;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

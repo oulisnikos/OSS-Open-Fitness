@@ -4,6 +4,8 @@ import { AlertController, LoadingController, NavController } from "@ionic/angula
 import { Subscription } from "rxjs";
 import { AuthActions, AuthService, IAuthAction } from "ionic-appauth";
 import { App } from "@capacitor/app";
+import { OssAuthServiceExtension } from "../service/extension/oss-auth-service-extension";
+import { Browser } from "@capacitor/browser";
 
 @Component({
   selector: "app-landing",
@@ -21,7 +23,8 @@ export class LandingPage implements OnInit, OnDestroy {
     private router: Router,
     private navCtrl: NavController,
     private auth: AuthService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private ossExt: OssAuthServiceExtension
   ) {
     // Get Application Information
     App.getInfo().then((info) => {
@@ -41,18 +44,23 @@ export class LandingPage implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  private onAuthEvents(action: IAuthAction) {
-    console.log("🚀 ~ file: landing.page.ts ~ line 46 ~ LandingPage ~ onAuthEvents ~ action", action);
-    // Για Test
-    this.loginInProgress = false;
+  ionViewDidEnter() {
+    if(this.loginInProgress) {
+      this.loginInProgress = false;
+    }
+    Browser.addListener('browserFinished', () => {
+      this.loginInProgress = false;
+    });
+  }
 
+  private async onAuthEvents(action: IAuthAction) {
+    console.log("🚀 ~ file: landing.page.ts ~ line 46 ~ LandingPage ~ onAuthEvents ~ action", action);
+    this.loginInProgress = true;
     if (action.action === AuthActions.SignInSuccess) {
-      // this.loginInProgress = false;
       this.navCtrl.setDirection("root");
       this.router.navigateByUrl("/tabs");
     }
     if (action.action === AuthActions.SignInFailed) {
-      // this.loginInProgress = false;
       this.alertController
         .create({
           header: "Signin failed",
@@ -63,12 +71,13 @@ export class LandingPage implements OnInit, OnDestroy {
           alertEl.present();
         });
     }
+    this.loginInProgress = false;
   }
 
-  public signIn() {
-    this.loginInProgress = true;
+  public async signIn() {
     try {
-      this.auth.signIn({});
+      this.loginInProgress = true;
+      await this.auth.signIn({});
     } catch (error) {
       console.log("an error occured on sign In ->", error);
     }

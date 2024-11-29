@@ -7,6 +7,11 @@ import { Storage} from '@ionic/storage-angular';
 import { PushNotificationsService } from './service/push-notifications.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { AuthService } from 'ionic-appauth';
+import { Capacitor } from '@capacitor/core';
+import { CapacitorBrowser } from 'ionic-appauth/lib/capacitor';
+import { Browser } from '@capacitor/browser';
+import { Network } from '@capacitor/network';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +19,7 @@ import { AuthService } from 'ionic-appauth';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  private _isConnected: boolean = true;
   constructor(
     private platform: Platform,
     private authService: AuthService,
@@ -26,8 +32,12 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(async() => {
       try {
-        const applicationInfo = await App.getInfo();
-        console.log("Application Information ", applicationInfo);
+        
+        if(this.platform.is('android') || this.platform.is('ios')) {
+          const applicationInfo = await App.getInfo();
+          console.log("Application Information ", applicationInfo);
+        }
+        
         // Initialize Storage
         await this.storage.create();
         console.log("Storage initialized successfully!");
@@ -48,10 +58,19 @@ export class AppComponent {
         StatusBar.setBackgroundColor({color: "#b42770"});
         StatusBar.show();
         SplashScreen.hide();
+        // setInterval(() => {
+        //   Network.getStatus().then((valStat) => {
+        //     this._isConnected = valStat.connected;
+        //   });
+        // }, 5000);
 
       } catch(error) {
         console.log("An error occured on Application initialization ->", error);
       }
     });
+  }
+
+  get isConnected() {
+    return this._isConnected;
   }
 }

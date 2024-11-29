@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OssAuthServiceExtension } from '../service/extension/oss-auth-service-extension';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor() {
+  }
 
 }

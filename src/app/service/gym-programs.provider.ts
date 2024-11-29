@@ -9,8 +9,6 @@ import { GymListingNew } from "../models/gym-listing.new";
 import { format } from "date-fns";
 import { PlanoDetails } from "../models/interfaces/plano-details.interface";
 import { AlertController } from "@ionic/angular";
-// TODO: Replace @ionic-native/network
-// import { Network } from "@ionic-native/network/ngx";
 // TODO: Replace @ionic-native/local-notifications
 //COMPLETE
 // import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
@@ -22,6 +20,7 @@ import { Observable } from "rxjs";
 import { AppStateProvider } from "./app-state";
 import { OssAuthServiceExtension } from "./extension/oss-auth-service-extension";
 import { ContractsInfoDto } from "../models/interfaces/gym-contract.interface";
+import { Network } from "@capacitor/network";
 
 @Injectable({
   providedIn: "root",
@@ -89,11 +88,11 @@ export class GymProgramsProvider {
   }
 
   async loadExplorePlanaDay(selectedDate: Date, completeCallback: Function): Promise<void> {
-    // TODO: Check if is connected to the network. Fix IT
-    // if (!(await this.networkConnected())) {
-    //   if (completeCallback) completeCallback();
-    //   return;
-    // }
+    if (!(await this.networkConnected())) {
+      if (completeCallback) completeCallback();
+      return;
+    }
+    console.log(";Έλεγχος για το πεδίο ossClientId ", this.ossAuthExtension.getOssClientId());
 
     if (!this.ossAuthExtension.getOssClientId()) {
       if (completeCallback) completeCallback();
@@ -206,17 +205,17 @@ export class GymProgramsProvider {
     );
   }
 
-  // TODO: Check this method that use network
   private async networkConnected(): Promise<boolean> {
-    // if (!this.network.type || this.network.type.toLowerCase() != "none") return true;
+    const netType = await (await Network.getStatus()).connectionType;
+    if (!netType || netType.toLowerCase() != "none") return true;
 
-    // let alert = await this.alertCtrl.create({
-    //   header: "Network",
-    //   subHeader: "Whoops! You're currently offline.",
-    //   message: "Try again later",
-    //   buttons: ["Ok"],
-    // });
-    // alert.present();
+    let alert = await this.alertCtrl.create({
+      header: "Network",
+      subHeader: "Whoops! You're currently offline.",
+      message: "Try again later",
+      buttons: ["Ok"],
+    });
+    alert.present();
 
     return false;
   }

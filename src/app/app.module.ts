@@ -21,13 +21,13 @@ import { RequestInterceptorService } from './service/request-interceptor.service
     AppRoutingModule,
     IonicStorageModule.forRoot(), 
     CoreModule,
+    HttpClientModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    // { provide: ErrorHandler, useClass: AppErrorHandler },
+    { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true },
     PushNotificationsService,
-    provideHttpClient()
   ],
   bootstrap: [AppComponent],
 })
