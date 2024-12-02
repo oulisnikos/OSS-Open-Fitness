@@ -7,11 +7,6 @@ import { Storage} from '@ionic/storage-angular';
 import { PushNotificationsService } from './service/push-notifications.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { AuthService } from 'ionic-appauth';
-import { Capacitor } from '@capacitor/core';
-import { CapacitorBrowser } from 'ionic-appauth/lib/capacitor';
-import { Browser } from '@capacitor/browser';
-import { Network } from '@capacitor/network';
-import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -58,19 +53,10 @@ export class AppComponent {
         StatusBar.setBackgroundColor({color: "#b42770"});
         StatusBar.show();
         SplashScreen.hide();
-        // setInterval(() => {
-        //   Network.getStatus().then((valStat) => {
-        //     this._isConnected = valStat.connected;
-        //   });
-        // }, 5000);
 
       } catch(error) {
         console.log("An error occured on Application initialization ->", error);
       }
     });
-  }
-
-  get isConnected() {
-    return this._isConnected;
   }
 }

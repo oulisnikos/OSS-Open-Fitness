@@ -27,7 +27,7 @@ import { AppStateProvider } from "src/app/service/app-state";
 export class ContractsPage implements OnInit, OnDestroy {
 
   contracts: ContractsInfo | null;
-  loading: boolean;
+  loading: boolean = false;
   qrViewType = CardViewTypes.VIEW_TYPE_QRCODE;
   bcViewType = CardViewTypes.VIEW_TYPE_BARCODE;
   icon!: string;
@@ -37,7 +37,6 @@ export class ContractsPage implements OnInit, OnDestroy {
     public appState: AppStateProvider,
   ) {
     this.contracts = null;
-    this.loading = false;
   }
 
   ngOnInit(): void {
@@ -48,6 +47,7 @@ export class ContractsPage implements OnInit, OnDestroy {
   }
 
   ionViewDidEnter() {
+    this.loading = false;
     this.icon = this.appState.appPreferences.selectedViewType === CardViewTypes.VIEW_TYPE_QRCODE ? "barcode-outline" : "qr-code-outline";
     this.loadInfoInternal();
   }

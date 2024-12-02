@@ -19,7 +19,7 @@ export class MySchedulePage {
   @ViewChild("fromDateDatetimeElement", {static: false}) fromDateDt!: IonDatetime;
   listData: GymListingNew;
   isLoading: boolean = false;
-  currnet_date!: Date;
+  currnet_date!: string;
 
   constructor(
     private gymProgramProvider: GymProgramsProvider,
@@ -30,7 +30,7 @@ export class MySchedulePage {
     private modalController: ModalController,
   ) {
     this.listData = this.appState.mySchedule;
-    this.currnet_date = new Date();
+    this.currnet_date = new Date().toISOString();
   }
 
   ionViewDidEnter() {
@@ -95,11 +95,11 @@ export class MySchedulePage {
   }
 
   onSelectFromDate(ev: any) {
-    console.log("on Select Date fired....");
+    console.log("on Select Date fired....", ev);
     this.isLoading = true;
     this.loadMyScheduleInternal(() => {
       this.isLoading = false;
-    }, /*new Date(ev.srcElement.value)*/ this.currnet_date);
+    }, /*new Date(ev.srcElement.value)*/ new Date(this.currnet_date));
   }
 
   selectDate() {
@@ -108,5 +108,9 @@ export class MySchedulePage {
 
   cancel() {
     this.fromDateDt.cancel(true);
+  }
+
+  onModalDidDismiss(ev: any) {
+    console.log("OnModal Did Dismiss ", ev);
   }
 }

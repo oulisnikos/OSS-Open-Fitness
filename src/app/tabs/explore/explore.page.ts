@@ -46,14 +46,14 @@ export class ExplorePage {
     private ossAuthExt: OssAuthServiceExtension
   ) {
     this.listData = this.appState.explorePlanaDay;
+  }
+
+  async ionViewDidEnter() {
     setInterval(() => {
       Network.getStatus().then((valStat) => {
         this.isConnected = valStat.connected;
       });
-    });
-  }
-
-  async ionViewDidEnter() {
+    }, 5000);
     console.log("Ion view did enter and after load plana if empty.");
     await this.ossAuthExt.getConnectedUser();
     this.loadListIfEmpty();

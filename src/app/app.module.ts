@@ -12,6 +12,7 @@ import { PushNotificationsService } from './service/push-notifications.service';
 import { CoreModule } from './service/core/core.module';
 import { AppErrorHandler } from './service/app-error-handler';
 import { RequestInterceptorService } from './service/request-interceptor.service';
+import { Calendar } from '@awesome-cordova-plugins/calendar/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,8 @@ import { RequestInterceptorService } from './service/request-interceptor.service
     { provide: ErrorHandler, useClass: AppErrorHandler },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true },
     PushNotificationsService,
+    Calendar
+    //provideHttpClient()
   ],
   bootstrap: [AppComponent],
 })

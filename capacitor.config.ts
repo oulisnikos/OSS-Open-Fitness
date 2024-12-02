@@ -30,7 +30,8 @@ const config: CapacitorConfig = {
       androidSpinnerStyle: "small",
       iosSpinnerStyle: "small",
       splashFullScreen: true,
-      splashImmersive: true
+      splashImmersive: true,
+      androidSplashResourceName: "splash",
     }
   }
 };
