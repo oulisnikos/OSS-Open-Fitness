@@ -16,9 +16,7 @@ const routes: Routes = [
     path: "tabs",
     canActivate: [AuthGuardService],
     loadChildren: () => import("./tabs/tabs.module").then(m => m.TabsPageModule)
-  },
-  //{ path: 'auth/callback', loadChildren: () => import("./service/auth/auth-callback/auth-callback.module").then(m => m.AuthCallbackPageModule) },
-  //{ path: 'endsession', loadChildren: () => import("./service/auth/end-session/end-session.module").then(m => m.EndSessionPageModule) },
+  }
 ];
 @NgModule({
   imports: [

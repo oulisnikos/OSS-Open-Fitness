@@ -15,7 +15,7 @@
             (ionChange)="onSelectFromDate($event)"
             presentation="date"
             preferWheel="true"
-            [value]="currnet_date"
+            [(ngModel)]="currnet_date"
           >
             <ion-buttons slot="buttons">
               <ion-button (click)="cancel()">Cancel</ion-button>

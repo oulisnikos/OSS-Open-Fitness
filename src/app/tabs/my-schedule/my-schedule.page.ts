@@ -1,6 +1,4 @@
 import { Component, ViewChild } from "@angular/core";
-// TODO: Replace @ionic-native/call-number
-// import { CallNumber } from "@ionic-native/call-number/ngx";
 import { IonDatetime, IonRouterOutlet, ModalController } from "@ionic/angular";
 import { fuseAnimations } from "./../../animations/animations";
 import { GymListingNew } from "./../../models/gym-listing.new";
@@ -9,6 +7,7 @@ import { AppStateProvider } from "./../../service//app-state";
 import { GymProgramsProvider } from "./../../service/gym-programs.provider";
 import { UtilsService } from "./../../service/utils/utils.service";
 import { PlanoPage } from "../../plano/plano.page";
+import { OpswCallNumber } from "src/app/service/call-number.service";
 
 @Component({
   selector: "app-my-schedule",
@@ -25,7 +24,7 @@ export class MySchedulePage {
   constructor(
     private gymProgramProvider: GymProgramsProvider,
     public appState: AppStateProvider,
-    // private call: CallNumber,
+    private callNumber: OpswCallNumber,
     public utils: UtilsService,
     private routerOutlet: IonRouterOutlet,
     private modalController: ModalController,
@@ -80,8 +79,6 @@ export class MySchedulePage {
           });
         },
       },
-      // TODO: Check this property beacause tell that is not known
-      // swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
     });
     await modal.present();
@@ -92,19 +89,9 @@ export class MySchedulePage {
     return plano.gymnasthsPhotoUrl.replace("rest.", "cdn.");
   }
 
-  // TODO: Fix this method with callNumber
   async onCall(event: MouseEvent) {
-    // event.stopPropagation();
-    // try {
-    //   await this.call.callNumber(this.listData.stoixeiaEtaireias.tilefonoEpikoinonias1, true);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  }
-
-  async onShowFilter(ev: any) {
-    // TODO: Check methos open on IonDate
-    // await this.fromDateDt.open();
+    event.stopPropagation();
+    this.callNumber.call_number(this.listData.stoixeiaEtaireias.tilefonoEpikoinonias1);
   }
 
   onSelectFromDate(ev: any) {

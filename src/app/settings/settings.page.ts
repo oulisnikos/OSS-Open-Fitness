@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-// import { Calendar } from "@ionic-native/calendar/ngx";
+import { Calendar } from "@awesome-cordova-plugins/calendar/ngx";
 import { AlertController, ModalController, Platform } from "@ionic/angular";
 import { AppStateProvider } from "../service/app-state";
 
@@ -14,17 +14,15 @@ export class SettingsPage {
 
   constructor(
     public appState: AppStateProvider,
-    // TODO: Replace @ionic-native/calendar
-    // private calendar: Calendar,
+    private calendar: Calendar,
     private plt: Platform,
     private alertCtrl: AlertController,
     private modalController: ModalController
   ) {
     this.plt.ready().then(() => {
-      // TODO: Fix this method to list all availeble calendar 
-      // this.calendar.listCalendars().then((cals) => {
-      //   this.calendars = cals;
-      // });
+      this.calendar.listCalendars().then((cals) => {
+        this.calendars = cals;
+      });
     });
   }
 

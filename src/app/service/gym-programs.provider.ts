@@ -14,8 +14,7 @@ import { AlertController } from "@ionic/angular";
 // import { LocalNotifications } from "@ionic-native/local-notifications/ngx";
 //TODO: Must remove this declate. Do not use local-Notification
 // import { LocalNotifications } from '@capacitor/local-notifications';
-// TODO: Replace @ionic-native/calendar
-// import { Calendar, CalendarOptions } from "@ionic-native/calendar/ngx";
+import {Calendar, CalendarOptions} from "@awesome-cordova-plugins/calendar/ngx";
 import { Observable } from "rxjs";
 import { AppStateProvider } from "./app-state";
 import { OssAuthServiceExtension } from "./extension/oss-auth-service-extension";
@@ -34,7 +33,7 @@ export class GymProgramsProvider {
     // private localNotifications: LocalNotifications,
     private ossAuthExtension: OssAuthServiceExtension,
     private alertCtrl: AlertController,
-    // private calendar: Calendar,
+    private calendar: Calendar,
     private mapper: MapperService
   ) {
     const self = this;
@@ -161,7 +160,12 @@ export class GymProgramsProvider {
     this.loadGenericListing(this.configuration.exploreMonthUrl, this.appState.exploreMonth, completeCallback);
   }
 
-  loadInfoMessages(completeCallback: Function): void {
+  async loadInfoMessages(completeCallback: Function): Promise<void> {
+    if (!(await this.networkConnected())) {
+      if (completeCallback) completeCallback();
+      return;
+    }
+
     (<Observable<InfoMessages>>(
       this.http.get(this.configuration.infoMessagesUrl + this.ossAuthExtension.getOssClientId())
     )).subscribe((data) => {
@@ -170,7 +174,12 @@ export class GymProgramsProvider {
     });
   }
 
-  loadContractsInfoMessages(completeCallback: Function): void {
+  async loadContractsInfoMessages(completeCallback: Function): Promise<void> {
+    if (!(await this.networkConnected())) {
+      if (completeCallback) completeCallback();
+      return;
+    }
+
     (<Observable<ContractsInfoDto>>(
       this.http.get(
         `${this.configuration.infoMessagesUrl}${this.ossAuthExtension.getOssClientId()}/?dosw=mycontracts`
@@ -439,51 +448,50 @@ export class GymProgramsProvider {
     // }
   }
 
-  // TODO: Check this method because use Calendar
-  addCalendarEvent(cal: any, gymProgram: GymProgram) {
-    // let startDate = new Date(gymProgram.dateBegin);
-    // let endDate = new Date(gymProgram.dateEnd);
-    // let options: CalendarOptions = {
-    //   calendarId: cal.id,
-    //   calendarName: cal.name,
-    //   // url: "http://www.openfitness.gr",
-    //   firstReminderMinutes: 40,
-    //   secondReminderMinutes: 20,
-    // };
 
-    // this.calendar
-    //   .createEventWithOptions(
-    //     `Open Fitness - ${gymProgram.mathimaDescr}`,
-    //     gymProgram.aithousaDescr,
-    //     `${gymProgram.mathimaDescr} w/${gymProgram.gymnasthsName}`,
-    //     startDate,
-    //     endDate,
-    //     options
-    //   )
-    //   .then(() => {});
+  addCalendarEvent(cal: any, gymProgram: GymProgram) {
+    let startDate = new Date(gymProgram.dateBegin);
+    let endDate = new Date(gymProgram.dateEnd);
+    let options: CalendarOptions = {
+      calendarId: cal.id,
+      calendarName: cal.name,
+      // url: "http://www.openfitness.gr",
+      firstReminderMinutes: 40,
+      secondReminderMinutes: 20,
+    };
+
+    this.calendar
+      .createEventWithOptions(
+        `Open Fitness - ${gymProgram.mathimaDescr}`,
+        gymProgram.aithousaDescr,
+        `${gymProgram.mathimaDescr} w/${gymProgram.gymnasthsName}`,
+        startDate,
+        endDate,
+        options
+      )
+      .then(() => {});
   }
 
-  // TODO: Check this method because use Calendar
   addCalendarEventNew(cal: any, plano: Plano) {
-    // let startDate = new Date(plano.dtBe);
-    // let endDate = new Date(plano.dtEn);
-    // let options: CalendarOptions = {
-    //   calendarId: cal.id,
-    //   calendarName: cal.name,
-    //   // url: "http://www.openfitness.gr",
-    //   firstReminderMinutes: 40,
-    //   secondReminderMinutes: 20,
-    // };
+    let startDate = new Date(plano.dtBe);
+    let endDate = new Date(plano.dtEn);
+    let options: CalendarOptions = {
+      calendarId: cal.id,
+      calendarName: cal.name,
+      // url: "http://www.openfitness.gr",
+      firstReminderMinutes: 40,
+      secondReminderMinutes: 20,
+    };
 
-    // this.calendar
-    //   .createEventWithOptions(
-    //     `Open Fitness - ${plano.mathimaDescr}`,
-    //     plano.aithousaDescr,
-    //     `${plano.mathimaDescr} w/${plano.gymnasthsName}`,
-    //     startDate,
-    //     endDate,
-    //     options
-    //   )
-    //   .then(() => {});
+    this.calendar
+      .createEventWithOptions(
+        `Open Fitness - ${plano.mathimaDescr}`,
+        plano.aithousaDescr,
+        `${plano.mathimaDescr} w/${plano.gymnasthsName}`,
+        startDate,
+        endDate,
+        options
+      )
+      .then(() => {});
   }
 }
