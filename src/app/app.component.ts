@@ -50,7 +50,10 @@ export class AppComponent {
           console.log("An error occured in bootstrapPushNotification ", error)
         }
         
-        StatusBar.setBackgroundColor({color: "#b42770"});
+        // This future is supported only in Android.
+        if (!this.platform.is("ios")) {
+          StatusBar.setBackgroundColor({color: "#b42770"});
+        }
         StatusBar.show();
         SplashScreen.hide();
 

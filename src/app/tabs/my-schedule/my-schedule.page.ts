@@ -51,7 +51,7 @@ export class MySchedulePage {
       if (event?.target) {
         event.target.complete();
       }
-    })
+    }, new Date(this.currnet_date));
   }
 
   private loadMyScheduleInternal(callback: Function, dateFrom?: Date) {

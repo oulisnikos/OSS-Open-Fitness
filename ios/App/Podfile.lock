@@ -5,15 +5,21 @@ PODS:
     - Capacitor
   - CapacitorBrowser (6.0.3):
     - Capacitor
+  - CapacitorCallNumber (1.0.3):
+    - Capacitor
   - CapacitorCommunityFcm (6.0.0):
     - Capacitor
     - Firebase/Messaging
   - CapacitorCordova (6.1.2)
   - CapacitorDevice (6.0.1):
     - Capacitor
+  - CapacitorEmailComposer (6.0.0):
+    - Capacitor
   - CapacitorHaptics (6.0.1):
     - Capacitor
   - CapacitorKeyboard (6.0.2):
+    - Capacitor
+  - CapacitorNetwork (6.0.3):
     - Capacitor
   - CapacitorPushNotifications (6.0.2):
     - Capacitor
@@ -24,6 +30,8 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (6.0.1):
     - Capacitor
+  - CordovaPlugins (6.1.2):
+    - CapacitorCordova
   - Firebase/CoreOnly (11.4.2):
     - FirebaseCore (= 11.4.2)
   - Firebase/Messaging (11.4.2):
@@ -88,15 +96,19 @@ DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorApp (from `../../node_modules/@capacitor/app`)"
   - "CapacitorBrowser (from `../../node_modules/@capacitor/browser`)"
+  - CapacitorCallNumber (from `../../node_modules/capacitor-call-number`)
   - "CapacitorCommunityFcm (from `../../node_modules/@capacitor-community/fcm`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
   - "CapacitorDevice (from `../../node_modules/@capacitor/device`)"
+  - CapacitorEmailComposer (from `../../node_modules/capacitor-email-composer`)
   - "CapacitorHaptics (from `../../node_modules/@capacitor/haptics`)"
   - "CapacitorKeyboard (from `../../node_modules/@capacitor/keyboard`)"
+  - "CapacitorNetwork (from `../../node_modules/@capacitor/network`)"
   - "CapacitorPushNotifications (from `../../node_modules/@capacitor/push-notifications`)"
   - CapacitorSecureStoragePlugin (from `../../node_modules/capacitor-secure-storage-plugin`)
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
+  - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
   - Firebase/Messaging
 
 SPEC REPOS:
@@ -119,16 +131,22 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/app"
   CapacitorBrowser:
     :path: "../../node_modules/@capacitor/browser"
+  CapacitorCallNumber:
+    :path: "../../node_modules/capacitor-call-number"
   CapacitorCommunityFcm:
     :path: "../../node_modules/@capacitor-community/fcm"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorDevice:
     :path: "../../node_modules/@capacitor/device"
+  CapacitorEmailComposer:
+    :path: "../../node_modules/capacitor-email-composer"
   CapacitorHaptics:
     :path: "../../node_modules/@capacitor/haptics"
   CapacitorKeyboard:
     :path: "../../node_modules/@capacitor/keyboard"
+  CapacitorNetwork:
+    :path: "../../node_modules/@capacitor/network"
   CapacitorPushNotifications:
     :path: "../../node_modules/@capacitor/push-notifications"
   CapacitorSecureStoragePlugin:
@@ -137,20 +155,26 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/splash-screen"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
+  CordovaPlugins:
+    :path: "../capacitor-cordova-ios-plugins"
 
 SPEC CHECKSUMS:
   Capacitor: 679f9673fdf30597493a6362a5d5bf233d46abc2
   CapacitorApp: 0bc633b4eae40a1f32cd2834788fad3bc42da6a1
   CapacitorBrowser: aab1ed943b01c0365c4810538a8b3477e2d9f72e
+  CapacitorCallNumber: 3ecf964fae98aae33636d620f0e74cc95ee2fcec
   CapacitorCommunityFcm: a4a524712c41db0a97e23f7f7d4b38b5d33de7a0
   CapacitorCordova: f48c89f96c319101cd2f0ce8a2b7449b5fb8b3dd
   CapacitorDevice: 7097a1deb4224b77fd13a6e60a355d0062a5d772
+  CapacitorEmailComposer: 3c98c8cee452377cb5706cc8c59560ca70590009
   CapacitorHaptics: fe689ade56ef20ec9b041a753c6da70c5d8ec9a9
   CapacitorKeyboard: 2700f9b18687be021e28b5a09b59eb151a46d5e0
+  CapacitorNetwork: da96b5fff8d05b67f4658503aabb22f65bda2c0f
   CapacitorPushNotifications: ccd797926c030acad3d5498ef452c735c90a2c89
   CapacitorSecureStoragePlugin: ced6025438fbbdbfb9fffec4398e748572fc147b
   CapacitorSplashScreen: 250df9ef8014fac5c7c1fd231f0f8b1d8f0b5624
   CapacitorStatusBar: b81d4fb5d4e0064c712018071b3ab4b810b39a63
+  CordovaPlugins: a955800bf943da6f384c2c701eeafc391312de5a
   Firebase: 7fd5466678d964be78fbf536d8a3385da19c4828
   FirebaseCore: 6b32c57269bd999aab34354c3923d92a6e5f3f84
   FirebaseCoreInternal: 35731192cab10797b88411be84940d2beb33a238
@@ -162,6 +186,6 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 6d6c8226c25b7937f96d3602e79cdc0549efd4c3
+PODFILE CHECKSUM: 0bab6faf5a76efdde161d08d016c479f6238a619
 
 COCOAPODS: 1.16.2

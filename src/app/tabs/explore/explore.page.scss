@@ -70,6 +70,7 @@ span.status {
   padding: 8px 0;
   font-size: 14px;
   animation: fade-in 0.5s ease-in-out;
+  position: relative;
 }
 
 @keyframes fade-in {

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Open Fitness</string>
+	<string>Open Fitness</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -44,17 +44,24 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
+	<false/>
 	<key>CFBundleURLTypes</key>
 	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>gr.oss.open.fitness</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gr.oss.open.fitness</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSAppTransportSecurity</key>
 	<dict>
-	<key>CFBundleURLName</key>
-	<string>gr.oss.open.fitness</string>
-	<key>CFBundleURLSchemes</key>
-	<array>
-	<string>gr.oss.open.fitness</string>
-	</array>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
-	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app needs access to your calendar to schedule and manage Fitness events.</string>
 </dict>
 </plist>
