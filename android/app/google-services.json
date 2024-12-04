@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "954106559761",
-    "project_id": "open-fitness-85a69",
-    "storage_bucket": "open-fitness-85a69.firebasestorage.app"
+    "project_number": "369550109262",
+    "project_id": "fitness-oss",
+    "storage_bucket": "fitness-oss.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:954106559761:android:9a997831710f70a80360b0",
+        "mobilesdk_app_id": "1:369550109262:android:611890456c2d989225b11f",
         "android_client_info": {
           "package_name": "gr.oss.open.fitness"
         }
       },
       "oauth_client": [
         {
-          "client_id": "954106559761-90vqli9kemdd29ip4t2jst6lbviec884.apps.googleusercontent.com",
+          "client_id": "369550109262-pilbgs4e7d1tnj0h6fobhjihh5rargb6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBOpGkAz9vP1aY28vLF4qir16-b5VPnUIQ"
+          "current_key": "AIzaSyAmBcz-BIK8TvUDLu79_jZ6dJVHJjDnwL8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "954106559761-90vqli9kemdd29ip4t2jst6lbviec884.apps.googleusercontent.com",
+              "client_id": "369550109262-pilbgs4e7d1tnj0h6fobhjihh5rargb6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "369550109262-ec3qhpokcr2jvoqlaf925e2845d2tj3q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "gr.niou.test.notification"
+              }
             }
           ]
         }

@@ -14,7 +14,6 @@ import { AuthService } from 'ionic-appauth';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  private _isConnected: boolean = true;
   constructor(
     private platform: Platform,
     private authService: AuthService,
@@ -30,25 +29,20 @@ export class AppComponent {
         
         if(this.platform.is('android') || this.platform.is('ios')) {
           const applicationInfo = await App.getInfo();
-          console.log("Application Information ", applicationInfo);
+          console.log("Get Application Information ", applicationInfo);
         }
         
         // Initialize Storage
         await this.storage.create();
         console.log("Storage initialized successfully!");
 
-        try {
-          // Initialize AuthService
-          await this.authService.init();
-          console.log("Authorization Service initialize successfully!");
-        }catch(error) {
-          console.log("An occured on Auth Service Initiliazation ", error);
-        }
-        try {
-          this.pushNotification.bootstrapPushNotifications();
-        } catch(error) {
-          console.log("An error occured in bootstrapPushNotification ", error)
-        }
+        // Initialize AuthService
+        await this.authService.init();
+        console.log("Authorization Service initialize successfully!");
+        
+        // Notification Initialization
+        this.pushNotification.bootstrapPushNotifications();
+        console.log("Boostrap Push Notification Success!");
         
         // This future is supported only in Android.
         if (!this.platform.is("ios")) {
@@ -58,7 +52,7 @@ export class AppComponent {
         SplashScreen.hide();
 
       } catch(error) {
-        console.log("An error occured on Application initialization ->", error);
+        console.log("[ERROR] on App Initialization ", error);
       }
     });
   }
